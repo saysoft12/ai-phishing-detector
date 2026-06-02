@@ -1,3 +1,4 @@
+from fastapi.responses import FileResponse
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
@@ -27,6 +28,9 @@ class EmailRequest(BaseModel):
     email_text: str
 
 # API endpoint
+@app.get("/")
+def home():
+    return FileResponse("static/index.html")
 @app.post("/analyze")
 def analyze_email(request: EmailRequest):
 
